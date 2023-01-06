@@ -6,54 +6,54 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "country", schema = "movie")
-public class Country {
+@Table(name = "language", schema = "movie")
+public class Language {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id")
-    private Short id;
+    @Column(name = "language_id")
+    private Byte id;
 
-    @Column(name = "country")
-    private String country;
+    @Column(name = "name", columnDefinition = "char")
+    private String name;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
     private Date lastUpdate;
 
-    public Country() {
+    public Language() {
     }
 
-    public Country(
-            String country,
+    public Language(
+            String name,
             Date lastUpdate
     ) {
-        this.country = country;
+        this.name = name;
         this.lastUpdate = lastUpdate;
     }
 
-    public Short getId() {
+    public Byte getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Byte id) {
         this.id = id;
     }
 
-    public String getCountry() {
-        return country;
+    public String getName() {
+        return name;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date updated) {
-        this.lastUpdate = updated;
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }

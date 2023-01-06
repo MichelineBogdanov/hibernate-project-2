@@ -1,14 +1,19 @@
 package org.hibernate_project_2.repository;
 
-import java.util.List;
 import java.util.stream.Stream;
 
-public interface AbstractRepository<T> {
+public interface Repository<T, N> {
 
-    List<T> getAll();
+    Stream<T> getAll();
 
-    Stream<T> find(T t);
+    Stream<T> find(T entity);
 
+    T get(N id);
 
+    void create(T entity);
+
+    void update(T entity);
+
+    void delete(T entity);
 
 }
