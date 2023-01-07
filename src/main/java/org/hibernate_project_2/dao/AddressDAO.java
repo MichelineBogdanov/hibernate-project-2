@@ -1,25 +1,29 @@
-package org.hibernate_project_2.repository;
+package org.hibernate_project_2.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate_project_2.entity.Address;
-import org.hibernate_project_2.entity.Country;
 
-import java.util.stream.Stream;
+import java.util.List;
 
-public class AddressRepository extends AbstractRepository<Address, Short> {
+public class AddressDAO extends AbstractDAO<Address, Short> {
 
-    public AddressRepository(SessionFactory sessionFactory) {
+    public AddressDAO(SessionFactory sessionFactory) {
         super(sessionFactory, Address.class);
     }
 
     @Override
-    public Stream<Address> find(Address entity) {
-        return super.find(entity);
+    public List<Address> getAll() {
+        return super.getAll();
     }
 
     @Override
-    public Address get(Short id) {
-        return super.get(id);
+    public List<Address> findByCriteria(Address entity) {
+        return super.findByCriteria(entity);
+    }
+
+    @Override
+    public Address getById(Short id) {
+        return super.getById(id);
     }
 
     @Override

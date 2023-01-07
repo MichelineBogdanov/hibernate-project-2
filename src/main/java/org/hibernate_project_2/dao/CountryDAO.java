@@ -1,30 +1,29 @@
-package org.hibernate_project_2.repository;
+package org.hibernate_project_2.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate_project_2.entity.Country;
-import org.hibernate_project_2.entity.Customer;
 
-import java.util.stream.Stream;
+import java.util.List;
 
-public class CountryRepository extends AbstractRepository<Country, Short> {
+public class CountryDAO extends AbstractDAO<Country, Short> {
 
-    public CountryRepository(SessionFactory sessionFactory) {
+    public CountryDAO(SessionFactory sessionFactory) {
         super(sessionFactory, Country.class);
     }
 
     @Override
-    public Stream<Country> getAll() {
+    public List<Country> getAll() {
         return super.getAll();
     }
 
     @Override
-    public Stream<Country> find(Country entity) {
-        return super.find(entity);
+    public List<Country> findByCriteria(Country entity) {
+        return super.findByCriteria(entity);
     }
 
     @Override
-    public Country get(Short id) {
-        return super.get(id);
+    public Country getById(Short id) {
+        return super.getById(id);
     }
 
     @Override

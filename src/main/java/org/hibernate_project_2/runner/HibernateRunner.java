@@ -4,37 +4,49 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate_project_2.entity.Customer;
-import org.hibernate_project_2.repository.*;
+import org.hibernate_project_2.dao.*;
+import org.hibernate_project_2.entity.Store;
+
+import java.util.List;
 
 public class HibernateRunner {
 
     private final SessionFactory sessionFactory;
-    private final CustomerRepository customerRepository;
-    private final AddressRepository addressRepository;
-    private final CityRepository cityRepository;
-    private final CountryRepository countryRepository;
-    private final StoreRepository storeRepository;
+    private final CustomerDAO customerDAO;
+    private final AddressDAO addressDAO;
+    private final CityDAO cityDAO;
+    private final CountryDAO countryDAO;
+    private final StoreDAO storeDAO;
 
     public HibernateRunner() {
         sessionFactory = SessionCreator.getSessionFactory();
-        customerRepository = new CustomerRepository(sessionFactory);
-        addressRepository = new AddressRepository(sessionFactory);
-        cityRepository = new CityRepository(sessionFactory);
-        countryRepository = new CountryRepository(sessionFactory);
-        storeRepository = new StoreRepository(sessionFactory);
+        customerDAO = new CustomerDAO(sessionFactory);
+        addressDAO = new AddressDAO(sessionFactory);
+        cityDAO = new CityDAO(sessionFactory);
+        countryDAO = new CountryDAO(sessionFactory);
+        storeDAO = new StoreDAO(sessionFactory);
     }
 
     public static void main(String[] args) {
         HibernateRunner hibernateRunner = new HibernateRunner();
         System.out.println(hibernateRunner.getCustomer((short) 1));
-        Customer customer = new Customer();
-        System.out.println(customer.getId());
+        System.out.println(hibernateRunner.getCustomer((short) 2));
+
+        try (Session session = hibernateRunner.sessionFactory.getCurrentSession()) {
+            Transaction transaction = session.beginTransaction();
+            List<Store> all = hibernateRunner.storeDAO.getAll();
+            for (Store store : all) {
+                System.out.println(store);
+            }
+            transaction.commit();
+        }
+
     }
 
     private Customer getCustomer(short i) {
         try (Session session = sessionFactory.getCurrentSession()) {
             Transaction transaction = session.beginTransaction();
-            Customer customer = customerRepository.get(i);
+            Customer customer = customerDAO.getById(i);
             transaction.commit();
             return customer;
         }
@@ -43,8 +55,6 @@ public class HibernateRunner {
     private void createCustomer() {
         try (Session currentSession = sessionFactory.getCurrentSession()) {
             Transaction transaction = currentSession.beginTransaction();
-
-
 
             Customer customer = new Customer();
 

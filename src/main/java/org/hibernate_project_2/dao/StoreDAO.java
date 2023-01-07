@@ -1,29 +1,29 @@
-package org.hibernate_project_2.repository;
+package org.hibernate_project_2.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate_project_2.entity.Store;
 
-import java.util.stream.Stream;
+import java.util.List;
 
-public class StoreRepository extends AbstractRepository<Store, Byte> {
+public class StoreDAO extends AbstractDAO<Store, Byte> {
 
-    public StoreRepository(SessionFactory sessionFactory) {
+    public StoreDAO(SessionFactory sessionFactory) {
         super(sessionFactory, Store.class);
     }
 
     @Override
-    public Stream<Store> getAll() {
+    public List<Store> getAll() {
         return super.getAll();
     }
 
     @Override
-    public Stream<Store> find(Store entity) {
-        return super.find(entity);
+    public List<Store> findByCriteria(Store entity) {
+        return super.findByCriteria(entity);
     }
 
     @Override
-    public Store get(Byte id) {
-        return super.get(id);
+    public Store getById(Byte id) {
+        return super.getById(id);
     }
 
     @Override

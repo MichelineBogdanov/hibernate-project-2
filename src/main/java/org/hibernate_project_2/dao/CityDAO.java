@@ -1,30 +1,29 @@
-package org.hibernate_project_2.repository;
+package org.hibernate_project_2.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate_project_2.entity.City;
-import org.hibernate_project_2.entity.Country;
 
-import java.util.stream.Stream;
+import java.util.List;
 
-public class CityRepository extends AbstractRepository<City, Short> {
+public class CityDAO extends AbstractDAO<City, Short> {
 
-    public CityRepository(SessionFactory sessionFactory) {
+    public CityDAO(SessionFactory sessionFactory) {
         super(sessionFactory, City.class);
     }
 
     @Override
-    public Stream<City> getAll() {
+    public List<City> getAll() {
         return super.getAll();
     }
 
     @Override
-    public Stream<City> find(City entity) {
-        return super.find(entity);
+    public List<City> findByCriteria(City entity) {
+        return super.findByCriteria(entity);
     }
 
     @Override
-    public City get(Short id) {
-        return super.get(id);
+    public City getById(Short id) {
+        return super.getById(id);
     }
 
     @Override
