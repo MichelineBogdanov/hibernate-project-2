@@ -26,4 +26,18 @@ public class CustomerDAO extends AbstractDAO<Customer, Short> {
         return super.getById(id);
     }
 
+    @Override
+    public void create(Customer entity) {
+        super.create(entity);
+    }
+
+    @Override
+    public void update(Customer entity) {
+        super.update(entity);
+    }
+
+    @Override
+    public void delete(Customer entity) {
+        super.delete(entity);
+    }
 }

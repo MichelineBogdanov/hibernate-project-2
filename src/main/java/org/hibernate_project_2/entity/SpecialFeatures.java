@@ -1,5 +1,7 @@
 package org.hibernate_project_2.entity;
 
+import static java.util.Objects.isNull;
+
 public enum SpecialFeatures {
     TRAILERS("Trailers"),
     COMMENTARIES("Commentaries"),
@@ -18,6 +20,18 @@ public enum SpecialFeatures {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static SpecialFeatures getFeatureByValue(String name) {
+        if (!(isNull(name) || name.isEmpty())) {
+            SpecialFeatures[] features = SpecialFeatures.values();
+            for (SpecialFeatures feature : features) {
+                if (feature.name.equals(name)) {
+                    return feature;
+                }
+            }
+        }
+        return null;
     }
 
     @Override

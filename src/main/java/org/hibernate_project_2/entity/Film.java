@@ -7,7 +7,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.time.Year;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static java.util.Objects.isNull;
 
 @Entity
 @Table(name = "film", schema = "movie")
@@ -52,10 +56,9 @@ public class Film {
     @Column(name = "rating", columnDefinition = "enum('G', 'PG', 'PG-13', 'R', 'NC-17')")
     private Rating rating;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "special_features",
             columnDefinition = "set('Trailers', 'Commentaries', 'Deleted Scenes', 'Behind the Scenes')")
-    private SpecialFeatures specialFeatures;
+    private String specialFeatures;
 
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -88,7 +91,7 @@ public class Film {
             Short length,
             BigDecimal replacementCost,
             Rating rating,
-            SpecialFeatures specialFeatures,
+            String specialFeatures,
             Date lastUpdate,
             Set<Actor> actors,
             Set<Category> categories
@@ -197,12 +200,27 @@ public class Film {
         this.rating = rating;
     }
 
-    public SpecialFeatures getSpecialFeatures() {
-        return specialFeatures;
+    public Set<SpecialFeatures> getSpecialFeatures() {
+        if (isNull(specialFeatures) || specialFeatures.isEmpty()) {
+            return null;
+        }
+        Set<SpecialFeatures> result = new HashSet<>();
+        String[] features = specialFeatures.split(",");
+        for (String feature : features) {
+            result.add(SpecialFeatures.getFeatureByValue(feature));
+        }
+        result.remove(null);
+        return result;
     }
 
-    public void setSpecialFeatures(SpecialFeatures specialFeatures) {
-        this.specialFeatures = specialFeatures;
+    public void setSpecialFeatures(Set<SpecialFeatures> features) {
+        if (isNull(features)) {
+            specialFeatures = null;
+        } else {
+            specialFeatures = features.stream()
+                    .map(SpecialFeatures::getName)
+                    .collect(Collectors.joining(","));
+        }
     }
 
     public Date getLastUpdate() {
