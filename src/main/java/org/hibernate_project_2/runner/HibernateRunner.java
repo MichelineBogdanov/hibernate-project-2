@@ -47,7 +47,9 @@ public class HibernateRunner {
     public static void main(String[] args) {
         HibernateRunner hibernateRunner = new HibernateRunner();
 
-        hibernateRunner.createCustomer();
+        Customer customer = hibernateRunner.createCustomer();
+        Inventory inventory = hibernateRunner.customerRentInventory(customer);
+        hibernateRunner.customerReturnInventory(inventory);
 
         /*try (Session session = hibernateRunner.sessionFactory.getCurrentSession()) {
             Transaction transaction = session.beginTransaction();
@@ -81,10 +83,40 @@ public class HibernateRunner {
         }
     }
 
-    private void customerReturnInventory() {
+    private Film newFilmWasMade() {
         try (Session currentSession = sessionFactory.getCurrentSession()) {
             Transaction transaction = currentSession.beginTransaction();
 
+
+
+            transaction.commit();
+        }
+        return null;
+    }
+
+    private Inventory customerRentInventory(Customer customer) {
+        try (Session currentSession = sessionFactory.getCurrentSession()) {
+            Transaction transaction = currentSession.beginTransaction();
+            Film film = new Film();
+            film.setTitle("ACADEMY DINOSAUR");
+            filmDAO.findByCriteria(film).get(0);
+
+
+
+
+
+            transaction.commit();
+        }
+        return null;
+    }
+
+    private void customerReturnInventory(Inventory inventory) {
+        try (Session currentSession = sessionFactory.getCurrentSession()) {
+            Transaction transaction = currentSession.beginTransaction();
+
+
+
+            transaction.commit();
         }
     }
 

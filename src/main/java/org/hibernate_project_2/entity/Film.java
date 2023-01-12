@@ -3,6 +3,8 @@ package org.hibernate_project_2.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate_project_2.converters.RatingConverter;
+import org.hibernate_project_2.converters.YearConverter;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,6 +32,7 @@ public class Film {
     private String description;
 
     @Column(name = "release_year", columnDefinition = "year")
+    @Convert(converter = YearConverter.class)
     private Year year;
 
     @ManyToOne
@@ -52,8 +55,8 @@ public class Film {
     @Column(name = "replacement_cost")
     private BigDecimal replacementCost;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "rating", columnDefinition = "enum('G', 'PG', 'PG-13', 'R', 'NC-17')")
+    @Convert(converter = RatingConverter.class)
     private Rating rating;
 
     @Column(name = "special_features",

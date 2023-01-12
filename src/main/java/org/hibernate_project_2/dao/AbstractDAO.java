@@ -73,7 +73,7 @@ public abstract class AbstractDAO<T, N extends Number> implements Repository<T, 
         getSession().delete(entity);
     }
 
-    private Session getSession() {
+    protected Session getSession() {
         return sessionFactory.getCurrentSession();
     }
 }
