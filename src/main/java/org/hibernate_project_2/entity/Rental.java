@@ -3,7 +3,7 @@ package org.hibernate_project_2.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "rental", schema = "movie")
@@ -15,7 +15,7 @@ public class Rental {
     private Integer id;
 
     @Column(name = "rental_date")
-    private Date rentalDate;
+    private LocalDateTime rentalDate;
 
     @ManyToOne
     @JoinColumn(name = "inventory_id")
@@ -26,34 +26,17 @@ public class Rental {
     private Customer customer;
 
     @Column(name = "return_date")
-    private Date returnDate;
+    private LocalDateTime returnDate;
 
     @ManyToOne
     @JoinColumn(name = "staff_id")
     private Staff stuff;
 
     @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 
     public Rental() {
-    }
-
-    public Rental(
-            Date rentalDate,
-            Inventory inventory,
-            Customer customer,
-            Date returnDate,
-            Staff stuff,
-            Date lastUpdate
-    ) {
-        this.rentalDate = rentalDate;
-        this.inventory = inventory;
-        this.customer = customer;
-        this.returnDate = returnDate;
-        this.stuff = stuff;
-        this.lastUpdate = lastUpdate;
     }
 
     public Integer getId() {
@@ -64,11 +47,11 @@ public class Rental {
         this.id = id;
     }
 
-    public Date getRentalDate() {
+    public LocalDateTime getRentalDate() {
         return rentalDate;
     }
 
-    public void setRentalDate(Date rentalDate) {
+    public void setRentalDate(LocalDateTime rentalDate) {
         this.rentalDate = rentalDate;
     }
 
@@ -88,11 +71,11 @@ public class Rental {
         this.customer = customer;
     }
 
-    public Date getReturnDate() {
+    public LocalDateTime getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -104,12 +87,24 @@ public class Rental {
         this.stuff = stuff;
     }
 
-    public Date getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "id=" + id +
+                ", rentalDate=" + rentalDate +
+                ", inventory=" + inventory +
+                ", customer=" + customer +
+                ", returnDate=" + returnDate +
+                ", stuff=" + stuff +
+                ", lastUpdate=" + lastUpdate +
+                '}';
+    }
 }

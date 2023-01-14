@@ -5,7 +5,7 @@ import org.hibernate_project_2.entity.Language;
 
 import java.util.List;
 
-public class LanguageDAO extends AbstractDAO<Language, Short> {
+public class LanguageDAO extends AbstractDAO<Language, Byte> {
 
     public LanguageDAO(SessionFactory sessionFactory) {
         super(sessionFactory, Language.class);
@@ -17,7 +17,7 @@ public class LanguageDAO extends AbstractDAO<Language, Short> {
     }
 
     @Override
-    public Language getById(Short id) {
+    public Language getById(Byte id) {
         return super.getById(id);
     }
 

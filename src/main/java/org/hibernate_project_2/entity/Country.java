@@ -3,7 +3,7 @@ package org.hibernate_project_2.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "country", schema = "movie")
@@ -18,19 +18,10 @@ public class Country {
     private String country;
 
     @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 
     public Country() {
-    }
-
-    public Country(
-            String country,
-            Date lastUpdate
-    ) {
-        this.country = country;
-        this.lastUpdate = lastUpdate;
     }
 
     public Short getId() {
@@ -49,11 +40,11 @@ public class Country {
         this.country = country;
     }
 
-    public Date getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date updated) {
+    public void setLastUpdate(LocalDateTime updated) {
         this.lastUpdate = updated;
     }
 }

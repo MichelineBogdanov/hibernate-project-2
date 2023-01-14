@@ -3,7 +3,7 @@ package org.hibernate_project_2.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "inventory", schema = "movie")
@@ -23,21 +23,10 @@ public class Inventory {
     private Store store;
 
     @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 
     public Inventory() {
-    }
-
-    public Inventory(
-            Film film,
-            Store store,
-            Date lastUpdate
-    ) {
-        this.film = film;
-        this.store = store;
-        this.lastUpdate = lastUpdate;
     }
 
     public Integer getId() {
@@ -64,11 +53,11 @@ public class Inventory {
         this.store = store;
     }
 
-    public Date getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 }

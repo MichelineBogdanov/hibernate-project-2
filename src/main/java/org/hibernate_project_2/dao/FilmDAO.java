@@ -1,7 +1,6 @@
 package org.hibernate_project_2.dao;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.hibernate_project_2.entity.Film;
 
 import java.util.List;
@@ -42,10 +41,4 @@ public class FilmDAO extends AbstractDAO<Film, Short> {
         super.delete(entity);
     }
 
-    public Film getAvailableFilm() {
-        Query<Film> query = getSession().createQuery("select f from Film f " +
-                "where f.id not in (select film.id from Inventory)", Film.class);
-        query.setMaxResults(1);
-        return query.getSingleResult();
-    }
 }

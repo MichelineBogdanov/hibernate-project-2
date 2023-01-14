@@ -3,7 +3,7 @@ package org.hibernate_project_2.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -19,9 +19,8 @@ public class Category {
     private String name;
 
     @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "film_category",
@@ -30,16 +29,6 @@ public class Category {
     private Set<Film> films;
 
     public Category() {
-    }
-
-    public Category(
-            String name,
-            Date lastUpdate,
-            Set<Film> films
-    ) {
-        this.name = name;
-        this.lastUpdate = lastUpdate;
-        this.films = films;
     }
 
     public Byte getId() {
@@ -58,11 +47,11 @@ public class Category {
         this.name = name;
     }
 
-    public Date getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

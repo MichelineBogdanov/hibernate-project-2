@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "staff", schema = "movie")
@@ -47,35 +47,10 @@ public class Staff {
     private String password;
 
     @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 
     public Staff() {
-    }
-
-    public Staff(
-            String firstName,
-            String lastName,
-            Address address,
-            byte[] picture,
-            String email,
-            Store store,
-            Boolean active,
-            String username,
-            String password,
-            Date lastUpdate
-    ) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.picture = picture;
-        this.email = email;
-        this.store = store;
-        this.active = active;
-        this.username = username;
-        this.password = password;
-        this.lastUpdate = lastUpdate;
     }
 
     public Byte getId() {
@@ -158,11 +133,11 @@ public class Staff {
         this.password = password;
     }
 
-    public Date getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 }

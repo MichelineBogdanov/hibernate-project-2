@@ -7,7 +7,7 @@ import org.hibernate_project_2.converters.RatingConverter;
 import org.hibernate_project_2.converters.YearConverter;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.time.Year;
 import java.util.HashSet;
 import java.util.Set;
@@ -64,9 +64,8 @@ public class Film {
     private String specialFeatures;
 
     @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "film_actor",
@@ -81,38 +80,6 @@ public class Film {
     private Set<Category> categories;
 
     public Film() {
-    }
-
-    public Film(
-            String title,
-            String description,
-            Year year,
-            Language language,
-            Language originalLanguage,
-            Byte rentalDuration,
-            BigDecimal rentalRate,
-            Short length,
-            BigDecimal replacementCost,
-            Rating rating,
-            String specialFeatures,
-            Date lastUpdate,
-            Set<Actor> actors,
-            Set<Category> categories
-    ) {
-        this.title = title;
-        this.description = description;
-        this.year = year;
-        this.language = language;
-        this.originalLanguage = originalLanguage;
-        this.rentalDuration = rentalDuration;
-        this.rentalRate = rentalRate;
-        this.length = length;
-        this.replacementCost = replacementCost;
-        this.rating = rating;
-        this.specialFeatures = specialFeatures;
-        this.lastUpdate = lastUpdate;
-        this.actors = actors;
-        this.categories = categories;
     }
 
     public Short getId() {
@@ -226,11 +193,11 @@ public class Film {
         }
     }
 
-    public Date getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
+    public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -248,5 +215,26 @@ public class Film {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    @Override
+    public String toString() {
+        return "Film{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", year=" + year +
+                ", language=" + language +
+                ", originalLanguage=" + originalLanguage +
+                ", rentalDuration=" + rentalDuration +
+                ", rentalRate=" + rentalRate +
+                ", length=" + length +
+                ", replacementCost=" + replacementCost +
+                ", rating=" + rating +
+                ", specialFeatures='" + specialFeatures + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                ", actors=" + actors +
+                ", categories=" + categories +
+                '}';
     }
 }

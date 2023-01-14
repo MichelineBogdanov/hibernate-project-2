@@ -3,7 +3,7 @@ package org.hibernate_project_2.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "address", schema = "movie")
@@ -33,36 +33,11 @@ public class Address {
     @Column(name = "phone")
     private String phone;
 
-    //TODO
-//    @Column(name = "location")
-//    private byte[] location;
-
     @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 
     public Address() {
-    }
-
-    public Address(
-            String address,
-            String address2,
-            String district,
-            City city,
-            String postalCode,
-            String phone,
-            //byte[] location,
-            Date lastUpdate
-    ) {
-        this.address = address;
-        this.address2 = address2;
-        this.district = district;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.phone = phone;
-        //this.location = location;
-        this.lastUpdate = lastUpdate;
     }
 
     public Short getId() {
@@ -121,19 +96,11 @@ public class Address {
         this.phone = phone;
     }
 
-//    public byte[] getLocation() {
-//        return location;
-//    }
-
-//    public void setLocation(byte[] location) {
-//        this.location = location;
-//    }
-
-    public Date getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Date updated) {
+    public void setLastUpdate(LocalDateTime updated) {
         this.lastUpdate = updated;
     }
 

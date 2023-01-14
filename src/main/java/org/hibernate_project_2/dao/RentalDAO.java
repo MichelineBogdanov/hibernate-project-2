@@ -1,6 +1,7 @@
 package org.hibernate_project_2.dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.hibernate_project_2.entity.Rental;
 
 import java.util.List;
@@ -39,5 +40,13 @@ public class RentalDAO extends AbstractDAO<Rental, Short> {
     @Override
     public void delete(Rental entity) {
         super.delete(entity);
+    }
+
+    public Rental returnInventory(Short customerId, Integer inventoryId) {
+        Query<Rental> query = getSession().createQuery("select r from Rental r where r.inventory.id = :INVENTORY_ID and r.customer.id = :CUSTOMER_ID",
+                Rental.class);
+        query.setParameter("INVENTORY_ID", inventoryId);
+        query.setParameter("CUSTOMER_ID", customerId);
+        return query.getSingleResult();
     }
 }

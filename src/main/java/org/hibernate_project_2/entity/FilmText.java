@@ -25,16 +25,6 @@ public class FilmText {
     public FilmText() {
     }
 
-    public FilmText(
-            Film film,
-            String title,
-            String description
-    ) {
-        this.film = film;
-        this.title = title;
-        this.description = description;
-    }
-
     public Short getId() {
         return id;
     }
